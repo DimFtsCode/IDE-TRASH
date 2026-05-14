@@ -1,0 +1,52 @@
+{
+  "type": "Feature",                 // GeoJSON object type (one record)
+
+  "geometry": {
+    "type": "Point",                 // geometry type
+    "coordinates": [
+      18.0,                          // longitude
+      42.0                           // latitude
+    ]
+  },
+
+  "properties": {
+    "time": "2026-04-27 12:00:00",   // timestamp of measurement
+
+    // 🌡️ Temperature & Atmosphere
+    "t2m": 292.3745,                 // temperature at 2m (Kelvin)
+    "d2m": 290.1572,                 // dew point at 2m (Kelvin)
+
+    // 💨 Wind
+    "u10": 0.9321,                   // wind component (east-west, m/s)
+    "v10": -0.3277,                  // wind component (north-south, m/s)
+    "fg10": 1.3833,                  // wind gust at 10m (m/s)
+
+    // ☁️ Clouds (0 to 1 scale)
+    "tcc": 1.0,                      // total cloud cover
+    "hcc": 0.2,                      // high cloud cover
+    "mcc": 0.5,                      // medium cloud cover
+    "lcc": 1.0,                      // low cloud cover
+
+    // 🌊 Sea / Waves (if marine dataset)
+    "swh": 0.1183,                   // significant wave height (m)
+    "hmax": 0.2248,                  // max wave height (m)
+    "mwd": 318.8458,                 // mean wave direction (degrees)
+    "mwp": 2.5722,                   // mean wave period (seconds)
+
+    // 🌬️ Pressure
+    "msl": 101777.0,                 // mean sea level pressure (Pa)
+    "sp": 101777.0,                  // surface pressure (Pa)
+
+    // 🌊 Sea surface
+    "sst": 292.3745,                 // sea surface temperature (Kelvin)
+
+    // ☀️ Radiation
+    "ssrd": 344.6396,                // surface solar radiation downwards
+    "strd": 350.0,                   // surface thermal radiation downwards
+
+    // 🗺️ Other
+    "z": 55868.4844,                 // geopotential (related to altitude)
+    "r": 87.0,                       // relative humidity (%)
+    "spatial_ref": 0                 // spatial reference ID (internal use)
+  }
+}
