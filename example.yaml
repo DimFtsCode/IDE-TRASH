@@ -1,0 +1,113 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+  namespace: 
+    app: 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 
+  template:
+    metadata:
+      labels:
+        app: 
+    spec:
+      restartPolicy: Always
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
+
+      containers:
+        - name: 
+          image: kosmos-registry.mission.proteas.eu/ide/.......................:...
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 77
+              name: http
+              protocol: TCP
+
+          env:
+            - name: DATABASE
+              value: 
+            - name: USER
+              value: 
+            - name: PASSWORD
+              value: 
+            - name: HOST
+              value: 
+            - name: PORT
+              value: 
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: true
+            runAsUser: 1001
+            runAsGroup: 1001
+            capabilities:
+              drop:
+                - ALL
+                
+	  resources:
+            requests:
+              cpu: "16"
+              memory: "128Gi"
+              nvidia.com/gpu: 1
+            limits:
+              cpu: "32"
+              memory: "256Gi"
+              nvidia.com/gpu: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: 
+  namespace:
+spec:
+  type: ClusterIP
+  selector:
+    app: pipe4ai-dss
+  ports:
+    - name: http
+      port: 80
+      targetPort: 77
+      protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 
+  namespace:
+  labels:
+    app:
+  annotations:
+    cert-manager.io/cluster-issuer: kosmos-ca-issuer
+spec:
+  rules:
+    - host: app_name.mission.proteas.eu
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: 
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - app_name.mission.proteas.eu
+      secretName: app_name-tls-secret
+
